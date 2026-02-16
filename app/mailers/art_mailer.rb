@@ -5,10 +5,12 @@ class ArtMailer < ApplicationMailer
   #   en.art_mailer.in_stock.subject
   #
   def in_stock(subscriber, art)
+      raise "Subscriber is nil!" if subscriber.nil?
+
     @subscriber = subscriber
+    @art = art
     @greeting = "Hi art enthusiast!"
 
-    @art = art
   mail to: subscriber.email, subject: "In stock"
   end
 end

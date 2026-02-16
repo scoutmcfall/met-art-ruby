@@ -4,4 +4,4 @@
 <%= link_to @art.name, art_url(@art) %> is back in stock
   <%= @greeting %>, find me in app/views/art_mailer/in_stock.html.erb
 </p>
-<%= link_to "Unsubscribe", unsubscribe_url(token: params[:subscriber].generate_token_for(:unsubscribe)) %>
+<%= link_to "Unsubscribe", unsubscribe_url(token: @subscriber.generate_token_for(:unsubscribe)) %>

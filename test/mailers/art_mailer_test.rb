@@ -21,6 +21,7 @@ class ArtMailerTest < ActionMailer::TestCase
     art = arts(:vase)               # make sure this fixture exists
 
     mail = ArtMailer.in_stock(subscriber, art)
+    assert_not_nil subscriber
 
     assert_equal "In stock", mail.subject
     assert_equal [subscriber.email], mail.to
