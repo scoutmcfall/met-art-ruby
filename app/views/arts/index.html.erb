@@ -1,0 +1,15 @@
+<h1><%= t ".title" %></h1>
+
+<h1>Arts</h1>
+<%= link_to "Login", new_session_path unless authenticated? %>
+<%= link_to "New art", new_art_path if authenticated? %>
+
+
+<div id="arts">
+  <% @arts.each do |art| %>
+    <div>
+      <%= link_to art.name, art_path(art.id) %>
+    </div>
+  <% end %>
+</div>
+

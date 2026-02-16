@@ -1,0 +1,5 @@
+es:
+  hello: "Hola mundo"
+  arts:
+    index:
+      title: "Artes"
