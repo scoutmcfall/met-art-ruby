@@ -53,3 +53,63 @@ section.product img {
   flex-basis: 50%;
   max-width: 50%;
 }
+
+/* Enhanced UI for Arts landing page */
+.site-header {
+  border-bottom: 1px solid #e6e6e6;
+  background: #fff;
+}
+.site-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.site-header .brand h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #222;
+}
+.actions .btn {
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #d0d0d0;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  background: #fff;
+}
+.actions .btn + .btn { margin-left: 0.5rem }
+.actions .btn-primary {
+  background: #1f6feb;
+  color: white;
+  border-color: #1f6feb;
+}
+.hero { text-align: center; padding: 1rem 0 1.5rem; }
+.hero .lead { color: #444; margin: 0; font-size: 1.05rem }
+.content-grid { display: grid; grid-template-columns: 1fr 380px; gap: 2rem; max-width: 1100px; margin: 1rem auto; }
+.arts-column { }
+.arts-list { display: flex; flex-direction: column; gap: 0.75rem }
+.card { background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); padding: 0.75rem }
+.card-body h3 { margin: 0 0 0.4rem 0; font-size: 1.05rem }
+.card .meta { font-size: 0.85rem; color: #666 }
+.met-column { }
+.met-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 0.75rem }
+.met-card { background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.met-card img { width: 100%; height: auto; display: block }
+.met-caption { padding: 0.5rem; font-size: 0.85rem; color: #333 }
+.muted { color: #777 }
+
+.met-details { padding: 0 0.5rem 0.75rem; font-size: 0.85rem; color: #444 }
+.met-details div { margin-top: 0.25rem }
+.met-details strong { color: #222; margin-right: 0.25rem }
+
+@media(min-width: 900px) {
+  .met-grid { grid-template-columns: repeat(1, 1fr) }
+}
+
+@media(max-width: 800px) {
+  .content-grid { grid-template-columns: 1fr; }
+  .met-column { order: 2 }
+}

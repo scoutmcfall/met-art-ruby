@@ -1,15 +1,70 @@
-<h1><%= t ".title" %></h1>
-
-<h1>Arts</h1>
-<%= link_to "Login", new_session_path unless authenticated? %>
-<%= link_to "New art", new_art_path if authenticated? %>
-
-
-<div id="arts">
-  <% @arts.each do |art| %>
-    <div>
-      <%= link_to art.name, art_path(art.id) %>
+<header class="site-header">
+  <nav>
+    <div class="brand">
+      <h1>Arts</h1>
     </div>
-  <% end %>
-</div>
+    <div class="actions">
+      <%= link_to "Login", new_session_path, class: "btn" unless authenticated? %>
+      <%= link_to "Create account", new_user_path, class: "btn btn-primary" unless authenticated? %>
+      <%= link_to "New art", new_art_path, class: "btn" if authenticated? %>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <p class="lead">A curated listing of art — plus inspiring images from The Metropolitan Museum of Art.</p>
+  </section>
+
+  <section class="content-grid">
+    <div class="arts-column">
+      <h2>Your Arts</h2>
+      <div class="arts-list">
+        <% @arts.each do |art| %>
+          <article class="card">
+            <div class="card-body">
+              <h3><%= link_to art.name, art_path(art.id) %></h3>
+              <div class="meta">Added: <%= art.created_at.to_date %></div>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    </div>
+
+    <aside class="met-column">
+      <h2>From The Met</h2>
+      <% if @external_images.present? %>
+        <div class="met-grid">
+          <% @external_images.each do |img| %>
+            <div class="met-card">
+                <a href="<%= img[:objectURL] %>" target="_blank" rel="noopener">
+                  <%= image_tag img[:src], alt: img[:title], loading: "lazy" %>
+                </a>
+                <div class="met-caption"><%= img[:title] %></div>
+                <div class="met-details">
+                  <% if img[:artist].present? %>
+                    <div class="met-artist"><strong>Artist:</strong> <%= img[:artist] %></div>
+                  <% end %>
+                  <% if img[:date].present? %>
+                    <div class="met-date"><strong>Date:</strong> <%= img[:date] %></div>
+                  <% end %>
+                  <% if img[:medium].present? %>
+                    <div class="met-medium"><strong>Medium:</strong> <%= img[:medium] %></div>
+                  <% end %>
+                  <% if img[:department].present? %>
+                    <div class="met-department"><strong>Department:</strong> <%= img[:department] %></div>
+                  <% end %>
+                  <% if img[:culture].present? %>
+                    <div class="met-culture"><strong>Culture:</strong> <%= img[:culture] %></div>
+                  <% end %>
+                </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="muted">No external images available.</p>
+      <% end %>
+    </aside>
+  </section>
+</main>
 

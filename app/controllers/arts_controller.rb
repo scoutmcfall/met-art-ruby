@@ -4,6 +4,36 @@ class ArtsController < ApplicationController
 
   def index
     @arts = Art.all
+    begin
+      client = MetMuseum::Client.new
+
+      # Use the precomputed image-bearing id cache populated by ImageCacheJob.
+      ids = client.fetch_image_object_ids || client.fetch_object_ids
+
+      # Try a larger sample and collect until we have up to 6 images.
+      candidate_ids = ids.sample([ids.size, 60].min)
+      images = []
+      candidate_ids.each do |id|
+        break if images.size >= 6
+        obj = client.fetch_object(id)
+        next unless obj && obj["primaryImage"].present?
+        images << {
+          src: obj["primaryImage"],
+          title: obj["title"],
+          artist: obj["artistDisplayName"],
+          date: obj["objectDate"],
+          medium: obj["medium"],
+          department: obj["department"],
+          culture: obj["culture"],
+          objectURL: obj["objectURL"],
+          objectID: obj["objectID"]
+        }
+      end
+      @external_images = images
+    rescue => e
+      Rails.logger.debug("Arts#index MetMuseum error: #{e.class} #{e.message}")
+      @external_images = []
+    end
   end
 
   def show

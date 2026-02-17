@@ -19,4 +19,14 @@ Rails.application.routes.draw do
     resources :subscribers, only: [ :create ]
   end
   resource :unsubscribe, only: [ :show ]
+
+  # External Met Museum integration
+  get "art/random" => "external_arts#random"
+
+  # User registration
+  resources :users, only: [ :new, :create ]
+
+  # Subscribe/unsubscribe to Met objects (authenticated users only)
+  post "art/:object_id/subscribe" => "met_subscriptions#create", as: :met_subscriptions
+  delete "art/:object_id/unsubscribe" => "met_subscriptions#destroy", as: :met_unsubscribe
 end
