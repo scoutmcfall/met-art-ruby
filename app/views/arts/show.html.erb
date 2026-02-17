@@ -1,4 +1,4 @@
-<p><%= link_to "Back", arts_path, class: "btn" %></p>
+<!-- Back link removed -->
 
 <section class="art">
   <div class="art-media">
@@ -34,16 +34,10 @@
         <% end %>
       </div>
 
-      <div>
-        <!-- View on The Met button stays outside modal content -->
-        <button class="met-image-button" data-action="click->modal#open" data-object-id="<%= @met_object["objectID"] %>">
-          View on The Met
-        </button>
-      </div>
+      <!-- View on The Met button removed -->
     <% end %>
 
     <div class="art-actions">
-      <%= button_to "Back", arts_path, class: "btn" %>
       <% if authenticated? %>
         <%= button_to "Edit", edit_art_path(@art), class: "btn" %>
         <%= button_to "Delete", @art, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn" %>

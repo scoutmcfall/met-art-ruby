@@ -39,18 +39,6 @@ class ArtsController < ApplicationController
   def show
   end
 
-  def new
-    @art = Art.new
-  end
-
-  def create
-    @art = Art.new(art_params)
-    if @art.save
-      redirect_to @art
-    else
-      render :new, status: :unprocessable_entity
-    end
-  end
 
   def edit
   end

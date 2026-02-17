@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "arts#index"
 
-  resources :arts do
+  resources :arts, except: [:new, :create] do
     resources :subscribers, only: [ :create ]
   end
   resource :unsubscribe, only: [ :show ]
@@ -23,8 +23,7 @@ Rails.application.routes.draw do
   # External Met Museum integration
   get "art/random" => "external_arts#random"
 
-  # Fetch met object JSON for modal display
-  get "met_objects/:object_id" => "external_arts#show", as: :met_object
+  # Fetch met object JSON for modal display (removed)
 
   # User registration
   resources :users, only: [ :new, :create ]

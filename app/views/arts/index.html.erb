@@ -3,10 +3,9 @@
     <div class="brand">
       <h1>Arts</h1>
     </div>
-    <div class="actions">
+      <div class="actions">
       <%= button_to "Login", new_session_path, class: "btn" unless authenticated? %>
       <%= button_to "Create account", new_user_path, class: "btn btn-primary" unless authenticated? %>
-      <%= button_to "New art", new_art_path, class: "btn" if authenticated? %>
     </div>
   </nav>
 </header>
@@ -37,9 +36,9 @@
         <div class="met-grid">
           <% @external_images.each do |img| %>
             <div class="met-card">
-                <button class="met-image-button" data-action="click->modal#open" data-object-id="<%= img[:objectID] %>">
+                <div class="met-image">
                   <%= image_tag img[:src], alt: img[:title], loading: "lazy" %>
-                </button>
+                </div>
                 <div class="met-caption"><%= img[:title] %></div>
                 <div class="met-details">
                   <% if img[:artist].present? %>
