@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "arts#index"
 
-  resources :arts, except: [:new, :create] do
+  resources :arts, except: [ :new, :create ] do
     resources :subscribers, only: [ :create ]
   end
   resource :unsubscribe, only: [ :show ]

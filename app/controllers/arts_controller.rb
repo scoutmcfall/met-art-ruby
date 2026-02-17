@@ -11,7 +11,7 @@ class ArtsController < ApplicationController
       ids = client.fetch_image_object_ids || client.fetch_object_ids
 
       # Try a larger sample and collect until we have up to 6 images.
-      candidate_ids = ids.sample([ids.size, 60].min)
+      candidate_ids = ids.sample([ ids.size, 60 ].min)
       images = []
       candidate_ids.each do |id|
         break if images.size >= 3

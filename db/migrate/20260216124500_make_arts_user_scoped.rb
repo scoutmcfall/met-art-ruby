@@ -9,6 +9,6 @@ class MakeArtsUserScoped < ActiveRecord::Migration[8.1]
     end
 
     # Add uniqueness scoped to user
-    add_index :arts, [:user_id, :met_object_id], unique: true
+    add_index :arts, [ :user_id, :met_object_id ], unique: true
   end
 end

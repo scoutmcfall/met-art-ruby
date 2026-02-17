@@ -3,7 +3,7 @@ module MetMuseum
     queue_as :default
 
     # Queries to seed searches that commonly return image-bearing objects.
-    QUERIES = ("a".."z").to_a + ["the", "art", "painting", "portrait"]
+    QUERIES = ("a".."z").to_a + [ "the", "art", "painting", "portrait" ]
 
     def perform
       client = Client.new
