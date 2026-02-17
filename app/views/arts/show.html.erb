@@ -1,20 +1,55 @@
-<p><%= link_to "Back", arts_path %></p>
+<p><%= link_to "Back", arts_path, class: "btn" %></p>
 
 <section class="art">
-<%= image_tag @art.featured_image if @art.featured_image.attached? %>
+  <div class="art-media">
+    <% if @art.featured_image.attached? %>
+      <%= image_tag @art.featured_image, class: "art-featured" %>
+    <% elsif @met_object && @met_object["primaryImage"].present? %>
+      <%= image_tag @met_object["primaryImage"], class: "art-featured" %>
+    <% end %>
+  </div>
 
-<section class="art__info">
-<%= cache @art do %>
-<h1><%= @art.name %></h1>
-  <%= @art.description %>
-<% end %>
-<%= render "inventory", art: @art %>
+  <section class="art__info">
+    <%= cache @art do %>
+      <h1><%= @art.name %></h1>
+      <div class="art-description"><%= @art.description %></div>
+    <% end %>
 
-<%= link_to "Back", arts_path %>
+    <% if @met_object.present? %>
+      <div class="met-metadata">
+        <% if @met_object["artistDisplayName"].present? %>
+          <div><strong>Artist:</strong> <%= @met_object["artistDisplayName"] %></div>
+        <% end %>
+        <% if @met_object["objectDate"].present? %>
+          <div><strong>Date:</strong> <%= @met_object["objectDate"] %></div>
+        <% end %>
+        <% if @met_object["medium"].present? %>
+          <div><strong>Medium:</strong> <%= @met_object["medium"] %></div>
+        <% end %>
+        <% if @met_object["department"].present? %>
+          <div><strong>Department:</strong> <%= @met_object["department"] %></div>
+        <% end %>
+        <% if @met_object["culture"].present? %>
+          <div><strong>Culture:</strong> <%= @met_object["culture"] %></div>
+        <% end %>
+      </div>
 
-<% if authenticated? %>
-<%= link_to "Edit", edit_art_path(@art) %>
-<%= button_to "Delete", @art, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-<% end %>
+      <div>
+        <!-- View on The Met button stays outside modal content -->
+        <button class="met-image-button" data-action="click->modal#open" data-object-id="<%= @met_object["objectID"] %>">
+          View on The Met
+        </button>
+      </div>
+    <% end %>
+
+    <div class="art-actions">
+      <%= button_to "Back", arts_path, class: "btn" %>
+      <% if authenticated? %>
+        <%= button_to "Edit", edit_art_path(@art), class: "btn" %>
+        <%= button_to "Delete", @art, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn" %>
+      <% end %>
+    </div>
+  </section>
 </section>
-</section>
+
+<!-- Modal is provided by the layout (single shared instance) -->

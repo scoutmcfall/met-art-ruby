@@ -14,7 +14,7 @@ class ArtsController < ApplicationController
       candidate_ids = ids.sample([ids.size, 60].min)
       images = []
       candidate_ids.each do |id|
-        break if images.size >= 6
+        break if images.size >= 3
         obj = client.fetch_object(id)
         next unless obj && obj["primaryImage"].present?
         images << {
@@ -72,6 +72,15 @@ class ArtsController < ApplicationController
   private
     def set_art
       @art = Art.find(params[:id])
+      if @art.met_object_id.present?
+        begin
+          client = MetMuseum::Client.new
+          @met_object = client.fetch_object(@art.met_object_id)
+        rescue => e
+          Rails.logger.debug("Arts#set_art: failed to fetch met object #{@art.met_object_id}: #{e.class} #{e.message}")
+          @met_object = nil
+        end
+      end
     end
 
     def art_params

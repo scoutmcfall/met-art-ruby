@@ -23,17 +23,27 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-controller="modal">
       <div class="notice"><%= flash[:notice] %></div>
     <div class="alert"><%= flash[:alert] %></div>
 
        <nav>
-      <%= link_to "Home", root_path %>
+      <%= button_to "Home", root_path %>
       <%= button_to "Log out", session_path, method: :delete if authenticated? %>
     </nav>
 
     <main>
       <%= yield %>
     </main>
+    <!-- Modal for displaying Met object JSON -->
+    <div class="modal" aria-hidden="true">
+      <div data-modal-target="dialog" class="modal-dialog" role="dialog" aria-modal="true">
+        <button class="modal-close" data-action="click->modal#close">×</button>
+        <div class="modal-body">
+          <pre data-modal-target="content" class="modal-content"> </pre>
+        </div>
+      </div>
+      <div class="modal-backdrop" data-action="click->modal#close"></div>
+    </div>
   </body>
 </html>

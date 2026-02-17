@@ -31,4 +31,20 @@ class ExternalArtsController < ApplicationController
       "objectURL"
     )
   end
+
+  # GET /met_objects/:object_id
+  def show
+    object_id = params[:object_id]
+    begin
+      client = MetMuseum::Client.new
+      object = client.fetch_object(object_id)
+      if object
+        render json: object
+      else
+        head :not_found
+      end
+    rescue MetMuseum::Client::Error
+      head :bad_gateway
+    end
+  end
 end

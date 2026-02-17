@@ -105,6 +105,25 @@ section.product img {
 .met-details div { margin-top: 0.25rem }
 .met-details strong { color: #222; margin-right: 0.25rem }
 
+/* Art show page */
+.art { display: flex; gap: 1.5rem; max-width: 1100px; margin: 1rem auto }
+.art-media { flex: 1 }
+.art-featured { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.08) }
+.art__info { flex: 1 }
+.met-metadata { margin-top: 1rem; background: #fafafa; padding: 0.75rem; border-radius: 6px }
+.met-metadata div { margin-bottom: 0.5rem }
+.art-actions { margin-top: 1rem; display:flex; gap:0.5rem }
+
+/* Modal styles */
+.modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 1200 }
+.modal[aria-hidden="false"] { display: flex }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.45) }
+.modal-dialog { position: relative; z-index: 2; max-width: 900px; width: 95%; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.25) }
+.modal-close { position: absolute; top: 8px; right: 8px; background: transparent; border: none; font-size: 1.25rem; padding: 0.5rem 0.75rem; cursor: pointer }
+.modal-body { padding: 1rem; max-height: 70vh; overflow: auto }
+.modal-content { background: #111; color: #e6e6e6; padding: 1rem; border-radius: 4px; white-space: pre-wrap }
+.met-image-button { border: none; padding: 0; background: transparent; cursor: pointer }
+
 @media(min-width: 900px) {
   .met-grid { grid-template-columns: repeat(1, 1fr) }
 }

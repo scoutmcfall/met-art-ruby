@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   # External Met Museum integration
   get "art/random" => "external_arts#random"
 
+  # Fetch met object JSON for modal display
+  get "met_objects/:object_id" => "external_arts#show", as: :met_object
+
   # User registration
   resources :users, only: [ :new, :create ]
 
