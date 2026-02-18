@@ -74,13 +74,18 @@ module MetMuseum
       end
     end
 
-    # Public: Return a random cached object ID.
     def random_cached_id
-      ids = fetch_object_ids
-      return nil if ids.blank?
+        ids = Rails.cache.read(OBJECT_IDS_CACHE_KEY)
+        if ids.blank?
+            ids = fetch_object_ids
+            Rails.cache.write(OBJECT_IDS_CACHE_KEY, ids) if ids.present?
+        end
 
-      ids.sample
+        return nil if ids.blank?
+
+        ids.sample
     end
+
 
     # Public: Fetch full object details by ID.
     def fetch_object(object_id)
