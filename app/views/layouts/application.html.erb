@@ -28,12 +28,13 @@
     <div class="alert"><%= flash[:alert] %></div>
 
        <nav>
-      <%= link_to "Home", root_path %>
-      <%= button_to "Log out", session_path, method: :delete if authenticated? %>
+      <%= link_to "Home", root_path, class: "button" %>
+      <%= link_to "Log out", session_path, class: "button", method: :delete if authenticated? %>
     </nav>
 
     <main>
       <%= yield %>
     </main>
+    <!-- modal removed -->
   </body>
 </html>

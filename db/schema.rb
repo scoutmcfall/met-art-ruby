@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_15_231518) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_16_124500) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -53,8 +53,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_15_231518) do
     t.datetime "created_at", null: false
     t.string "dimensions"
     t.integer "inventory_count", default: 0, null: false
+    t.integer "met_object_id"
     t.string "name"
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id", "met_object_id"], name: "index_arts_on_user_id_and_met_object_id", unique: true
+    t.index ["user_id"], name: "index_arts_on_user_id"
+  end
+
+  create_table "met_subscriptions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "met_object_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id", "met_object_id"], name: "index_met_subscriptions_on_user_id_and_met_object_id", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -84,6 +96,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_15_231518) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "arts", "users"
+  add_foreign_key "met_subscriptions", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "subscribers", "arts"
 end

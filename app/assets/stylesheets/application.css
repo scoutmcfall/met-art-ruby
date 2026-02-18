@@ -53,3 +53,113 @@ section.product img {
   flex-basis: 50%;
   max-width: 50%;
 }
+/* button styling for link */
+.button {
+  display: inline-block;
+  padding: 0.5em 1em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Enhanced UI for Arts landing page */
+.site-header {
+  border-bottom: 1px solid #e6e6e6;
+  background: #fff;
+}
+.site-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.site-header .brand h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #222;
+}
+.actions .btn {
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #d0d0d0;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  background: #fff;
+}
+.actions .btn + .btn { margin-left: 0.5rem }
+.actions .btn-primary {
+  background: #1f6feb;
+  color: white;
+  border-color: #1f6feb;
+}
+.hero { text-align: center; padding: 1rem 0 1.5rem; }
+.hero .lead { color: #444; margin: 0; font-size: 1.05rem }
+.content-grid { display: grid; grid-template-columns: 1fr 380px; gap: 2rem; max-width: 1100px; margin: 1rem auto; }
+.arts-column { }
+.arts-list { display: flex; flex-direction: column; gap: 0.75rem }
+.card { background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); padding: 0.75rem }
+.card-body h3 { margin: 0 0 0.4rem 0; font-size: 1.05rem }
+.card .meta { font-size: 0.85rem; color: #666 }
+.met-column { }
+.met-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 0.75rem }
+.met-card { background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.met-card img { width: 100%; height: auto; display: block }
+.met-caption { padding: 0.5rem; font-size: 0.85rem; color: #333 }
+.muted { color: #777 }
+
+.met-details { padding: 0 0.5rem 0.75rem; font-size: 0.85rem; color: #444 }
+.met-details div { margin-top: 0.25rem }
+.met-details strong { color: #222; margin-right: 0.25rem }
+
+/* Art show page */
+.art { display: flex; gap: 1.5rem; max-width: 1100px; margin: 1rem auto }
+.art-media { flex: 1 }
+.art-featured { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.08) }
+.art__info { flex: 1 }
+.met-metadata { margin-top: 1rem; background: #fafafa; padding: 0.75rem; border-radius: 6px }
+.met-metadata div { margin-bottom: 0.5rem }
+.art-actions { margin-top: 1rem; display:flex; gap:0.5rem }
+
+/* Modal removed (styles cleaned) */
+
+/* Auth (login / signup) styles */
+.auth-container { display:flex; align-items:center; justify-content:center; padding: 2rem 1rem; }
+.auth-card { width: 100%; max-width: 420px; background: #fff; border-radius: 10px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); padding: 1.5rem; border: 1px solid #eef2f7 }
+.auth-card h1 { margin: 0 0 0.25rem 0; font-size: 1.4rem; color: #111 }
+.auth-card .muted { margin: 0 0 1rem 0; color: #586069 }
+.form-group { margin-bottom: 0.85rem }
+.form-label { display:block; font-size: 0.875rem; margin-bottom: 0.35rem; color: #222 }
+.form-control { width:100%; padding: 0.6rem 0.75rem; border-radius: 8px; border: 1px solid #d9e0ea; background: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,0.6); font-size: 0.95rem }
+.form-control:focus { outline: none; border-color: #7aa7ff; box-shadow: 0 0 0 3px rgba(31,111,235,0.12) }
+.form-actions { display:flex; align-items:center; gap:0.75rem; margin-top: 0.75rem }
+.btn { display:inline-block; padding: 0.55rem 0.9rem; border-radius: 8px; border: 1px solid #cdd6e0; background: #fff; color: #1f2937; cursor: pointer; text-decoration: none }
+.btn-primary { background: #1f6feb; color: #fff; border-color: #1f6feb }
+.auth-link { color: #1f6feb; font-size: 0.95rem; text-decoration: none }
+.auth-link:hover { text-decoration: underline }
+.auth-footer { margin-top: 1rem; font-size: 0.95rem }
+
+/* Ensure inputs don't overflow their container and improve small-screen layout */
+.auth-card, .form-control { box-sizing: border-box }
+.form-control { display: block }
+
+@media(max-width: 480px) {
+  .auth-card { padding: 1rem; margin: 0 0.5rem }
+  .form-actions { flex-direction: column; align-items: stretch }
+  .form-actions .btn { width: 100% }
+  .auth-link { display: block; text-align: center; margin-top: 0.5rem }
+}
+
+
+@media(min-width: 900px) {
+  .met-grid { grid-template-columns: repeat(1, 1fr) }
+}
+
+@media(max-width: 800px) {
+  .content-grid { grid-template-columns: 1fr; }
+  .met-column { order: 2 }
+}
