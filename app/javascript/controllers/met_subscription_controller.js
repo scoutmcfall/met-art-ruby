@@ -80,6 +80,17 @@ export default class extends Controller {
     const body = document.createElement('div')
     body.className = 'card-body'
 
+    // If we have an image URL from server or the Met object src, show it
+    const imageUrl = data?.featured_image_url || this.srcValue
+    if (imageUrl) {
+      const img = document.createElement('img')
+      img.src = imageUrl
+      img.alt = name
+      img.loading = 'lazy'
+      img.className = 'card-image'
+      article.appendChild(img)
+    }
+
     const h3 = document.createElement('h3')
     if (artId) {
       const a = document.createElement('a')

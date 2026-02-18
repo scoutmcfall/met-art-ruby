@@ -17,7 +17,8 @@ class MetSubscriptionsController < ApplicationController
       end
 
       if art
-        render json: { id: art.id, name: art.name, met_object_id: art.met_object_id, created_at: art.created_at.iso8601 }, status: :created
+        featured_image_url = art.featured_image.attached? ? url_for(art.featured_image) : nil
+        render json: { id: art.id, name: art.name, met_object_id: art.met_object_id, created_at: art.created_at.iso8601, featured_image_url: featured_image_url }, status: :created
       else
         head :created
       end
