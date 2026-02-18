@@ -1,7 +1,0 @@
-<h1>Art in_stock</h1>
-
-<p>
-<%= link_to @art.name, art_url(@art) %> is back in stock
-  <%= @greeting %>, find me in app/views/art_mailer/in_stock.html.erb
-</p>
-<%= link_to "Unsubscribe", unsubscribe_url(token: @subscriber.generate_token_for(:unsubscribe)) %>

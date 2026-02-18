@@ -1,5 +1,4 @@
 class Art < ApplicationRecord
-    include Notifications
     belongs_to :user, optional: true
     has_many :subscribers, dependent: :destroy
     has_one_attached :featured_image
