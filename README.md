@@ -1,4 +1,4 @@
-# Parachute / met-art-ruby
+# met-art-ruby
 
 This Rails application powers a small art cataloging service that integrates
 with The Met's API and provides a simple UI for managing art records.
