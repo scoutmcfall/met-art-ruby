@@ -21,6 +21,11 @@
       <div class="arts-list">
         <% @arts.each do |art| %>
           <article class="card" data-met-id="<%= art.met_object_id %>">
+            <% if art.featured_image.attached? %>
+              <%= image_tag art.featured_image, class: "card-image", alt: art.name %>
+            <% elsif art.met_object_id.present? && defined?(@art_met_images) && @art_met_images[art.met_object_id] %>
+              <%= image_tag @art_met_images[art.met_object_id], class: "card-image", alt: art.name %>
+            <% end %>
             <div class="card-body">
               <h3><%= link_to art.name, art_path(art.id) %></h3>
               <div class="meta">Added: <%= art.created_at.to_date %></div>

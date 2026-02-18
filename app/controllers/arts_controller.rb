@@ -34,6 +34,30 @@ class ArtsController < ApplicationController
       Rails.logger.debug("Arts#index MetMuseum error: #{e.class} #{e.message}")
       @external_images = []
     end
+
+    # For any user-scoped art that doesn't yet have an ActiveStorage thumbnail attached,
+    # try to fetch the Met primary image as a fallback so thumbnails persist after reload.
+    begin
+      met_ids = @arts.map(&:met_object_id).compact.uniq
+      missing_ids = met_ids.select do |mid|
+        art = @arts.detect { |a| a.met_object_id == mid }
+        art && !art.featured_image.attached?
+      end
+      @art_met_images = {}
+      missing_ids.each do |mid|
+        begin
+          obj = client.fetch_object(mid)
+          if obj && obj["primaryImage"].present?
+            @art_met_images[mid] = obj["primaryImage"]
+          end
+        rescue => e
+          Rails.logger.debug("Arts#index: failed to fetch met image for #{mid}: #{e.class} #{e.message}")
+        end
+      end
+    rescue => e
+      Rails.logger.debug("Arts#index met fallback error: #{e.class} #{e.message}")
+      @art_met_images ||= {}
+    end
   end
 
   def show
@@ -72,6 +96,6 @@ class ArtsController < ApplicationController
     end
 
     def art_params
-      params.expect(art: [ :name, :description, :featured_image, :inventory_countr ])
+      params.expect(art: [ :name, :description, :featured_image, :inventory_count ])
     end
 end

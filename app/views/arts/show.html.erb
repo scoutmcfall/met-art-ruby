@@ -39,8 +39,8 @@
 
     <div class="art-actions">
       <% if authenticated? %>
-        <%= button_to "Edit", edit_art_path(@art), class: "btn" %>
-        <%= button_to "Delete", @art, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn" %>
+        <%= link_to "Edit", edit_art_path(@art), class: "btn" %>
+        <%= link_to "Delete", @art, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn" %>
       <% end %>
     </div>
   </section>
