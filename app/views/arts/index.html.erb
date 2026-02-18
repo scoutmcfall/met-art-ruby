@@ -20,7 +20,7 @@
       <h2>Your Arts</h2>
       <div class="arts-list">
         <% @arts.each do |art| %>
-          <article class="card">
+          <article class="card" data-met-id="<%= art.met_object_id %>">
             <div class="card-body">
               <h3><%= link_to art.name, art_path(art.id) %></h3>
               <div class="meta">Added: <%= art.created_at.to_date %></div>
@@ -35,7 +35,7 @@
       <% if @external_images.present? %>
         <div class="met-grid">
           <% @external_images.each do |img| %>
-            <div class="met-card">
+            <div class="met-card" data-controller="met-subscription" data-met-subscription-object-id-value="<%= img[:objectID] %>" data-met-subscription-title-value="<%= h(img[:title]) %>" data-met-subscription-src-value="<%= h(img[:src]) %>" data-met-subscription-artist-value="<%= h(img[:artist]) %>">
                 <div class="met-image">
                   <%= image_tag img[:src], alt: img[:title], loading: "lazy" %>
                 </div>
@@ -61,9 +61,9 @@
                   <% if authenticated? %>
                     <% subscribed = Current.user&.met_subscriptions&.exists?(met_object_id: img[:objectID]) %>
                     <% if subscribed %>
-                      <%= button_to "Unsubscribe", met_unsubscribe_path(img[:objectID]), method: :delete, class: "btn" %>
+                      <button type="button" class="btn" data-action="click->met-subscription#unsubscribe">Unsubscribe</button>
                     <% else %>
-                      <%= button_to "Subscribe", met_subscriptions_path(img[:objectID]), method: :post, class: "btn btn-primary" %>
+                      <button type="button" class="btn btn-primary" data-action="click->met-subscription#subscribe">Subscribe</button>
                     <% end %>
                   <% else %>
                     <%= button_to "Login to subscribe", new_session_path, class: "btn" %>

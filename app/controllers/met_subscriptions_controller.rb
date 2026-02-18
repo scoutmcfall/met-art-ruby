@@ -5,17 +5,22 @@ class MetSubscriptionsController < ApplicationController
     object_id = params[:object_id].to_i
     subscription = current_user_subscriptions.where(met_object_id: object_id).first_or_initialize
     if subscription.save
+      art = nil
       begin
         client = MetMuseum::Client.new
         object = client.fetch_object(object_id)
         if object.present?
-          Art.create_from_met_for_user!(object, Current.user)
+          art = Art.create_from_met_for_user!(object, Current.user)
         end
       rescue => e
         Rails.logger.debug("MetSubscriptions#create: failed to create Art from met object #{object_id}: #{e.class} #{e.message}")
       end
 
-      head :created
+      if art
+        render json: { id: art.id, name: art.name, met_object_id: art.met_object_id, created_at: art.created_at.iso8601 }, status: :created
+      else
+        head :created
+      end
     else
       render json: { errors: subscription.errors.full_messages }, status: :unprocessable_entity
     end
